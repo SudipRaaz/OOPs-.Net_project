@@ -1,0 +1,10 @@
+C:\Users\raaz4\source\repos\OOPsAssignment\OOPsAssignment\bin\Debug\OOPsAssignment.exe.config
+C:\Users\raaz4\source\repos\OOPsAssignment\OOPsAssignment\bin\Debug\OOPsAssignment.exe
+C:\Users\raaz4\source\repos\OOPsAssignment\OOPsAssignment\bin\Debug\OOPsAssignment.pdb
+C:\Users\raaz4\source\repos\OOPsAssignment\OOPsAssignment\obj\Debug\OOPsAssignment.csproj.AssemblyReference.cache
+C:\Users\raaz4\source\repos\OOPsAssignment\OOPsAssignment\obj\Debug\OOPsAssignment.Form1.resources
+C:\Users\raaz4\source\repos\OOPsAssignment\OOPsAssignment\obj\Debug\OOPsAssignment.Properties.Resources.resources
+C:\Users\raaz4\source\repos\OOPsAssignment\OOPsAssignment\obj\Debug\OOPsAssignment.csproj.GenerateResource.cache
+C:\Users\raaz4\source\repos\OOPsAssignment\OOPsAssignment\obj\Debug\OOPsAssignment.csproj.CoreCompileInputs.cache
+C:\Users\raaz4\source\repos\OOPsAssignment\OOPsAssignment\obj\Debug\OOPsAssignment.exe
+C:\Users\raaz4\source\repos\OOPsAssignment\OOPsAssignment\obj\Debug\OOPsAssignment.pdb
