@@ -110,5 +110,23 @@
   <ItemGroup>
     <None Include="Resources\button wall container.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\direction-north.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\direction-south.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red_firstFloorDisplay .jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red_firstFloorDisplay.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

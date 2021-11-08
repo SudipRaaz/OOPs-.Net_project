@@ -56,6 +56,10 @@ namespace OOPsAssignment
                 updoors_close.Enabled = false;
                 if (moving_down == true)
                 {
+                    lift_display.Image = global::OOPsAssignment.Properties.Resources.down;
+                    F_display.Image = global::OOPsAssignment.Properties.Resources.down;
+                    G_display.Image = global::OOPsAssignment.Properties.Resources.down;
+
                     go_down.Enabled = true;
                 }
             }
@@ -87,12 +91,14 @@ namespace OOPsAssignment
                 downdoors_close.Enabled = false;
                 if (moving_up == true)
                 {
+                    lift_display.Image = global::OOPsAssignment.Properties.Resources.up;
+                    G_display.Image = global::OOPsAssignment.Properties.Resources.up;
+                    F_display.Image = global::OOPsAssignment.Properties.Resources.up;
+
                     go_up.Enabled = true;
                 }
             }
         }
-
-       
 
         private void go_up_Tick(object sender, EventArgs e)
         {
@@ -102,8 +108,11 @@ namespace OOPsAssignment
             }
             else
             {
-                lift_display.Image = Properties.Resources.inside_life;
                 moving_up = false;
+                lift_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay_;
+                G_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay_;
+                F_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay_;
+
                 LiftStatus = "FirstFloor";
                 go_up.Enabled = false;
                 updoors_open.Enabled = true;
@@ -119,6 +128,10 @@ namespace OOPsAssignment
             else
             {
                 moving_down = false;
+                lift_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay; // resource file name Red_firstFloorDisplay = Red_GroundFloorDisplay
+                G_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay;    // resource file name Red_firstFloorDisplay = Red_GroundFloorDisplay
+                F_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay;    // resource file name Red_firstFloorDisplay = Red_GroundFloorDisplay
+
                 LiftStatus = "GroundFloor";
                 go_down.Enabled = false;
                 downdoors_open.Enabled = true;
@@ -128,6 +141,8 @@ namespace OOPsAssignment
         private void btn_firstFloor_Click(object sender, EventArgs e)
         {
             moving_up = true;
+            
+
             downdoors_close.Enabled = true;
         }
 
@@ -139,15 +154,27 @@ namespace OOPsAssignment
 
         private void btn_opendoor_Click(object sender, EventArgs e)
         {
-            if (LiftStatus == "GroundFloor") { downdoors_open.Enabled = true; }
-            if (LiftStatus == "FirstFloor") { updoors_open.Enabled = true; }
+            if (LiftStatus.Equals("GroundFloor")) { downdoors_open.Enabled = true; }
+            if (LiftStatus.Equals("FirstFloor")) { updoors_open.Enabled = true; }
         }
 
         private void btn_closedoors_Click(object sender, EventArgs e)
         {
-            if (LiftStatus == "GroundFloor") { downdoors_close.Enabled = true; }
-            if (LiftStatus == "FirstFloor") { updoors_close.Enabled = true; }
+            if (LiftStatus.Equals("GroundFloor")) { downdoors_close.Enabled = true; }
+            if (LiftStatus.Equals("FirstFloor")) { updoors_close.Enabled = true; }
 
+        }
+
+        private void request_F_Click(object sender, EventArgs e)
+        {
+            moving_down = true;
+            updoors_close.Enabled = true;
+        }
+
+        private void request_G_Click(object sender, EventArgs e)
+        {
+            moving_up = true;
+            downdoors_close.Enabled = true;
         }
     }
 }
