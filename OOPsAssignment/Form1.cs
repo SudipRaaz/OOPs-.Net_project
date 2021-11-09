@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.OleDb;
 
 namespace OOPsAssignment
 {
@@ -75,7 +76,7 @@ namespace OOPsAssignment
             else
             {
                 downdoors_open.Enabled = false;
-                
+
             }
         }
 
@@ -141,7 +142,8 @@ namespace OOPsAssignment
         private void btn_firstFloor_Click(object sender, EventArgs e)
         {
             moving_up = true;
-            
+            insertdata("going to first floor");
+
 
             downdoors_close.Enabled = true;
         }
@@ -176,5 +178,51 @@ namespace OOPsAssignment
             moving_up = true;
             downdoors_close.Enabled = true;
         }
+        /*
+         * Database part
+         * 
+         */
+
+        private bool filled;
+        public DataSet ds = new DataSet();
+
+        private void btn_log_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            try
+            {
+                logInformation s = new logInformation();
+                DataTable dt = s.ViewLog();
+                dataGridView1.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void insertdata(string action)
+        {
+            string date = DateTime.Now.ToShortDateString();
+            string time = DateTime.Now.ToLongTimeString();
+
+            logInformation s = new logInformation();
+            s.SaveLog(action);
+            MessageBox.Show("status udpated");
+            LoadData();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'appData.Log_Details' table. You can move, or remove it, as needed.
+            //this.log_DetailsTableAdapter.Fill(this.appData.Log_Details);
+            LoadData();
+
+        }
     }
+
 }
