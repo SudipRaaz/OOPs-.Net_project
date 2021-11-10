@@ -83,6 +83,16 @@ namespace OOPsAssignment.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap closed_door_without_frame {
+            get {
+                object obj = ResourceManager.GetObject("closed door without frame", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap direction_north {
             get {
                 object obj = ResourceManager.GetObject("direction-north", resourceCulture);

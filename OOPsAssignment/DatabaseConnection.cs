@@ -12,8 +12,9 @@ namespace OOPsAssignment
         public static OleDbConnection cn;
         public static void GetConnecton()
         {
+            // oledb connector with the database resource link
             cn = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=OOPsAssignmentDB.accdb");
-            cn.Open();
+            cn.Open(); // open the connection
         }
 
     }

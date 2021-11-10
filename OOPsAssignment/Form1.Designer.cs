@@ -36,6 +36,15 @@ namespace OOPsAssignment
             this.downdoors_close = new System.Windows.Forms.Timer(this.components);
             this.go_up = new System.Windows.Forms.Timer(this.components);
             this.go_down = new System.Windows.Forms.Timer(this.components);
+            this.btn_log = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.logDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.appData = new OOPsAssignment.AppData();
+            this.log_DetailsTableAdapter = new OOPsAssignment.AppDataTableAdapters.Log_DetailsTableAdapter();
             this.G_display = new System.Windows.Forms.PictureBox();
             this.F_display = new System.Windows.Forms.PictureBox();
             this.request_F = new System.Windows.Forms.Button();
@@ -56,15 +65,10 @@ namespace OOPsAssignment
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.btn_log = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.logDetailsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.appData = new OOPsAssignment.AppData();
-            this.log_DetailsTableAdapter = new OOPsAssignment.AppDataTableAdapters.Log_DetailsTableAdapter();
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.timeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.actionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.exit = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logDetailsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.G_display)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.F_display)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lift_display)).BeginInit();
@@ -79,9 +83,6 @@ namespace OOPsAssignment
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.logDetailsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.appData)).BeginInit();
             this.SuspendLayout();
             // 
             // updoors_open
@@ -113,6 +114,85 @@ namespace OOPsAssignment
             // 
             this.go_down.Interval = 1;
             this.go_down.Tick += new System.EventHandler(this.go_down_Tick);
+            // 
+            // btn_log
+            // 
+            this.btn_log.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_log.Location = new System.Drawing.Point(908, 105);
+            this.btn_log.Name = "btn_log";
+            this.btn_log.Size = new System.Drawing.Size(131, 43);
+            this.btn_log.TabIndex = 16;
+            this.btn_log.Text = "Clear Log";
+            this.btn_log.UseVisualStyleBackColor = true;
+            this.btn_log.Click += new System.EventHandler(this.btn_log_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.iDDataGridViewTextBoxColumn,
+            this.dateDataGridViewTextBoxColumn,
+            this.timeDataGridViewTextBoxColumn,
+            this.actionDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.logDetailsBindingSource;
+            this.dataGridView1.Location = new System.Drawing.Point(888, 154);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(632, 711);
+            this.dataGridView1.TabIndex = 17;
+            // 
+            // iDDataGridViewTextBoxColumn
+            // 
+            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
+            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.iDDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
+            this.iDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.iDDataGridViewTextBoxColumn.Width = 40;
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
+            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dateDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // timeDataGridViewTextBoxColumn
+            // 
+            this.timeDataGridViewTextBoxColumn.DataPropertyName = "Time";
+            this.timeDataGridViewTextBoxColumn.HeaderText = "Time";
+            this.timeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.timeDataGridViewTextBoxColumn.Name = "timeDataGridViewTextBoxColumn";
+            this.timeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.timeDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // actionDataGridViewTextBoxColumn
+            // 
+            this.actionDataGridViewTextBoxColumn.DataPropertyName = "Action";
+            this.actionDataGridViewTextBoxColumn.HeaderText = "Action";
+            this.actionDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.actionDataGridViewTextBoxColumn.Name = "actionDataGridViewTextBoxColumn";
+            this.actionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.actionDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // logDetailsBindingSource
+            // 
+            this.logDetailsBindingSource.DataMember = "Log_Details";
+            this.logDetailsBindingSource.DataSource = this.appData;
+            // 
+            // appData
+            // 
+            this.appData.DataSetName = "AppData";
+            this.appData.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // log_DetailsTableAdapter
+            // 
+            this.log_DetailsTableAdapter.ClearBeforeFill = true;
             // 
             // G_display
             // 
@@ -322,79 +402,16 @@ namespace OOPsAssignment
             this.pictureBox3.TabIndex = 9;
             this.pictureBox3.TabStop = false;
             // 
-            // btn_log
+            // exit
             // 
-            this.btn_log.Location = new System.Drawing.Point(1154, 105);
-            this.btn_log.Name = "btn_log";
-            this.btn_log.Size = new System.Drawing.Size(131, 43);
-            this.btn_log.TabIndex = 16;
-            this.btn_log.Text = "Display Log";
-            this.btn_log.UseVisualStyleBackColor = true;
-            this.btn_log.Click += new System.EventHandler(this.btn_log_Click);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDDataGridViewTextBoxColumn,
-            this.dateDataGridViewTextBoxColumn,
-            this.timeDataGridViewTextBoxColumn,
-            this.actionDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.logDetailsBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(888, 154);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(632, 711);
-            this.dataGridView1.TabIndex = 17;
-            // 
-            // logDetailsBindingSource
-            // 
-            this.logDetailsBindingSource.DataMember = "Log_Details";
-            this.logDetailsBindingSource.DataSource = this.appData;
-            // 
-            // appData
-            // 
-            this.appData.DataSetName = "AppData";
-            this.appData.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // log_DetailsTableAdapter
-            // 
-            this.log_DetailsTableAdapter.ClearBeforeFill = true;
-            // 
-            // iDDataGridViewTextBoxColumn
-            // 
-            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
-            this.iDDataGridViewTextBoxColumn.Width = 40;
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
-            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            this.dateDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // timeDataGridViewTextBoxColumn
-            // 
-            this.timeDataGridViewTextBoxColumn.DataPropertyName = "Time";
-            this.timeDataGridViewTextBoxColumn.HeaderText = "Time";
-            this.timeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.timeDataGridViewTextBoxColumn.Name = "timeDataGridViewTextBoxColumn";
-            this.timeDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // actionDataGridViewTextBoxColumn
-            // 
-            this.actionDataGridViewTextBoxColumn.DataPropertyName = "Action";
-            this.actionDataGridViewTextBoxColumn.HeaderText = "Action";
-            this.actionDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.actionDataGridViewTextBoxColumn.Name = "actionDataGridViewTextBoxColumn";
-            this.actionDataGridViewTextBoxColumn.Width = 125;
+            this.exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exit.Location = new System.Drawing.Point(1416, 105);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(90, 43);
+            this.exit.TabIndex = 18;
+            this.exit.Text = "Exit";
+            this.exit.UseVisualStyleBackColor = true;
+            this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
             // Form1
             // 
@@ -402,6 +419,7 @@ namespace OOPsAssignment
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.Controls.Add(this.exit);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btn_log);
             this.Controls.Add(this.G_display);
@@ -428,6 +446,9 @@ namespace OOPsAssignment
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Elevator";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logDetailsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.G_display)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.F_display)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lift_display)).EndInit();
@@ -442,9 +463,6 @@ namespace OOPsAssignment
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.logDetailsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.appData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -487,6 +505,7 @@ namespace OOPsAssignment
         private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn timeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn actionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button exit;
     }
 }
 

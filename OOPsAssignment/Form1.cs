@@ -32,7 +32,7 @@ namespace OOPsAssignment
         public void loadcomponent() => InitializeComponent();
         
         public delegate void MethodCall();
-        private void updoors_open_Tick(object sender, EventArgs e)
+        private void updoors_open_Tick(object sender, EventArgs e) // timer event
         {
             if (door_upL.Left >= x_doorL_open)
             {
@@ -47,7 +47,7 @@ namespace OOPsAssignment
             }
         }
 
-        private void updoors_close_Tick(object sender, EventArgs e)
+        private void updoors_close_Tick(object sender, EventArgs e) // timer event
         {
             if (door_upL.Left <= x_doorL_close)
             {
@@ -70,12 +70,12 @@ namespace OOPsAssignment
             }
         }
 
-        private void downdoors_open_Tick(object sender, EventArgs e)
+        private void downdoors_open_Tick(object sender, EventArgs e) // timer event
         {
             if (door_downL.Left >= x_doorL_open)
             {
-                door_downL.Left -= 1;
-                door_downR.Left += 1;
+                MethodCall downdoor = new MethodCall(downdoors_openMethod);
+                downdoor.Invoke();
             }
             else
             {
@@ -86,12 +86,18 @@ namespace OOPsAssignment
             }
         }
 
-        private void downdoors_close_Tick(object sender, EventArgs e)
+        private void downdoors_openMethod()
         {
-            if (door_downL.Left <= x_doorL_close)
+            door_downL.Left -= 1;
+            door_downR.Left += 1;
+        }
+
+        private void downdoors_close_Tick(object sender, EventArgs e) // timer event
+        {
+            if (door_downL.Left <= x_doorL_close) // if lift doors are open
             {
-                door_downL.Left += 1;
-                door_downR.Left -= 1;
+                MethodCall downdoor = new MethodCall(downdoors_closeMethod);
+                downdoor.Invoke();
             }
             else
             {
@@ -109,11 +115,18 @@ namespace OOPsAssignment
             }
         }
 
-        private void go_up_Tick(object sender, EventArgs e)
+        private void downdoors_closeMethod() // animation method to close down doors
+        {
+            door_downL.Left += 1;
+            door_downR.Left -= 1;
+        }
+
+        private void go_up_Tick(object sender, EventArgs e) // timer event
         {
             if (liftbox.Top != y_liftUp)
             {
-                liftbox.Top -= 1;
+                MethodCall movingUp = new MethodCall(liftUp);
+                movingUp.Invoke();
             }
             else
             {
@@ -121,6 +134,7 @@ namespace OOPsAssignment
                 request_G.BackColor = Color.White;
                 insertdata("LiftBox at First Floor");
                 moving_up = false;
+                liftbox.Image = Properties.Resources.inside_life;
                 lift_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay_;
                 G_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay_;
                 F_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay_;
@@ -131,11 +145,18 @@ namespace OOPsAssignment
             }
         }
 
-        private void go_down_Tick(object sender, EventArgs e)
+        private void liftUp() // method to animate liftbox moving down
         {
-            if (liftbox.Top != y_liftDown)
+            liftbox.Top -= 1;
+            liftbox.Image = Properties.Resources.closed_door_without_frame;
+        }
+
+        private void go_down_Tick(object sender, EventArgs e) // timer event 
+        {
+            if (liftbox.Top != y_liftDown) // moving the lift
             {
-                liftbox.Top += 1;
+                MethodCall movingUp = new MethodCall(liftDown);
+                movingUp.Invoke();
             }
             else
             {
@@ -143,6 +164,7 @@ namespace OOPsAssignment
                 request_F.BackColor = Color.White;
                 insertdata("liftBox at Ground Floor");
                 moving_down = false;
+                liftbox.Image = Properties.Resources.inside_life;
                 lift_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay; // resource file name Red_firstFloorDisplay = Red_GroundFloorDisplay
                 G_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay;    // resource file name Red_firstFloorDisplay = Red_GroundFloorDisplay
                 F_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay;    // resource file name Red_firstFloorDisplay = Red_GroundFloorDisplay
@@ -153,9 +175,15 @@ namespace OOPsAssignment
             }
         }
 
-        private void btn_firstFloor_Click(object sender, EventArgs e)
+        private void liftDown() // method to animate liftbox moving up
         {
-            if (moving_down == false)
+            liftbox.Top += 1;
+            liftbox.Image = Properties.Resources.closed_door_without_frame;
+        }
+
+        private void btn_firstFloor_Click(object sender, EventArgs e) // assigning button event 
+        {
+            if (moving_down == false) // if the lift isnot moving down
             {
                 btn_firstFloor.BackColor = Color.Red;
                 moving_up = true;
@@ -163,10 +191,10 @@ namespace OOPsAssignment
             }
         }
 
-        private void btn_groundFloor_Click(object sender, EventArgs e)
+        private void btn_groundFloor_Click(object sender, EventArgs e) // assigning button event 
         {
 
-            if(moving_up == false)
+            if(moving_up == false) // if the lift isnot moving up
             {
                 btn_groundFloor.BackColor = Color.Red;
                 moving_down = true;
@@ -175,84 +203,92 @@ namespace OOPsAssignment
             
         }
 
-        private void btn_opendoor_Click(object sender, EventArgs e)
+        private void btn_opendoor_Click(object sender, EventArgs e) // assigning button event 
         {
             btn_opendoor.BackColor = Color.Orange;
             if (LiftStatus.Equals("GroundFloor")) { downdoors_open.Enabled = true; }
             if (LiftStatus.Equals("FirstFloor")) { updoors_open.Enabled = true; }
         }
 
-        private void btn_closedoors_Click(object sender, EventArgs e)
+        private void btn_closedoors_Click(object sender, EventArgs e) // assigning button event 
         {
             btn_closedoors.BackColor = Color.Orange;
             if (LiftStatus.Equals("GroundFloor")) { downdoors_close.Enabled = true; }
             if (LiftStatus.Equals("FirstFloor")) { updoors_close.Enabled = true; }
         }
 
-        private void request_F_Click(object sender, EventArgs e)
+        private void request_F_Click(object sender, EventArgs e) // request first floor event
         {
-            if (LiftStatus.Equals("FirstFloor"))
+            if (LiftStatus.Equals("FirstFloor")) // if lift is at first floor
             {
-                request_F.BackColor = Color.Red;
+                request_F.BackColor = Color.Red; // btn color change
                 moving_down = true;
                 updoors_close.Enabled = true;
             }
             
         }
 
-        private void request_G_Click(object sender, EventArgs e)
+        private void request_G_Click(object sender, EventArgs e)  // request button event
         {
-            if (LiftStatus.Equals("GroundFloor"))
+            if (LiftStatus.Equals("GroundFloor")) // if lift is at ground floor
             {
-                request_G.BackColor = Color.Red;
+                request_G.BackColor = Color.Red; // button color
                 moving_up = true;
                 downdoors_close.Enabled = true;
 
             }
         }
 
-        private void btn_log_Click(object sender, EventArgs e)
+        private void btn_log_Click(object sender, EventArgs e)  // using delegate
         {
-            MethodCall call = new MethodCall(LoadData);
-            call.Invoke();
+            //MethodCall call = new MethodCall(LoadData); // invoking loaddata method
+            //call.Invoke();
+            dataGridView1.DataSource = null;
         }
 
-        private void LoadData()
+        private void LoadData() // loading the data into datagridview table
         {
             try
             {
                 logInformation s = new logInformation();
                 DataTable dt = s.ViewLog();
-                dataGridView1.DataSource = dt;
+                dataGridView1.DataSource = dt; // initializing the datagrid table source
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message); 
             }
         }
 
-        private void insertdata(string action)
+        private void insertdata(string action) // adding data to data base
         {
-            string date = DateTime.Now.ToShortDateString();
-            string time = DateTime.Now.ToLongTimeString();
-            //try
+            //exception handling
+            try
             {
-                logInformation s = new logInformation();
-                s.SaveLog(action);
+                logInformation s = new logInformation(); //creating object of logInformation class and calling a method from  it
+                s.SaveLog(action); 
             }
-            //catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Error saving the Log Data","Message",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // displaying error message
+                MessageBox.Show(ex.Message ,"Message",MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
             LoadData();
         }
 
+        // load the data when the form loads
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'appData.Log_Details' table. You can move, or remove it, as needed.
             //this.log_DetailsTableAdapter.Fill(this.appData.Log_Details);
             //LoadData();
+
+        }
+
+        private void exit_Click(object sender, EventArgs e) // button event
+        {
+            Application.ExitThread(); // close the software
 
         }
     }

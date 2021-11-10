@@ -11,6 +11,7 @@ namespace OOPsAssignment
 {
     class logInformation
     {
+        // to retrive the data from data and 
         public DataTable ViewLog()
         {
             DatabaseConnection.GetConnecton();
@@ -21,32 +22,38 @@ namespace OOPsAssignment
             return ds.Tables[0];
         }
 
+        // to insert the data into database
         public void SaveLog(string action)
         {
             string date = DateTime.Now.ToShortDateString();
             string time = DateTime.Now.ToLongTimeString();
 
             DatabaseConnection.GetConnecton();
-            string sql = "SELECT * FROM Log_Details";
-            //insert into Log_Details ([Date],[Time],[Action])values (@date, @time, @action)
-            OleDbCommand cmd = new OleDbCommand(sql, DatabaseConnection.cn);
+            
+            string sql1 = "insert into [Log_Details] ([Date],[Time],[Action])values (@date, @time, @action)";
+            OleDbCommand cmd = new OleDbCommand(sql1, DatabaseConnection.cn);
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             OleDbCommandBuilder obd = new OleDbCommandBuilder(da);
-            //cmd.ExecuteNonQuery();
-   
-            DataSet ds = new DataSet();
-            da.Fill(ds);
 
-            DataRow NewDr = ds.Tables[0].NewRow();
-            NewDr["Date"] = date;
-            NewDr["Time"] = time;
-            NewDr["Action"] = action;
+            cmd.Parameters.AddWithValue("@date", date);
+            cmd.Parameters.AddWithValue("@time", time);
+            cmd.Parameters.AddWithValue("@action", action);
 
-            ds.Tables[0].Rows.Add(NewDr);
-            DataSet dataSetChanges = ds.GetChanges();
-            da.Update(dataSetChanges);
-            ds.AcceptChanges();
-           
+            cmd.ExecuteNonQuery();
+
+            //DataSet ds = new DataSet();
+            //da.Fill(ds, "Log_Details");
+
+            //DataRow NewDr = ds.Tables[0].NewRow();
+            //NewDr["Date"] = date;
+            //NewDr["Time"] = time;
+            //NewDr["Action"] = action;
+
+            //ds.Tables[0].Rows.Add(NewDr);
+            //DataSet dataSetChanges = ds.GetChanges();
+            //da.Update(dataSetChanges);
+            //ds.AcceptChanges();
+
         }
     }
 }
