@@ -25,20 +25,17 @@ namespace OOPsAssignment
         {
             string date = DateTime.Now.ToShortDateString();
             string time = DateTime.Now.ToLongTimeString();
+
             DatabaseConnection.GetConnecton();
-            string sql = "insert into Log_Details values (@date, @time, @action)";
+            string sql = "SELECT * FROM Log_Details";
+            //insert into Log_Details ([Date],[Time],[Action])values (@date, @time, @action)
             OleDbCommand cmd = new OleDbCommand(sql, DatabaseConnection.cn);
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
-            //OleDbCommandBuilder odc = new OleDbCommandBuilder(da);
-
-            cmd.Parameters.AddWithValue("@date", date);
-            cmd.Parameters.AddWithValue("@time", time);
-            cmd.Parameters.AddWithValue("@action", action);
-
+            OleDbCommandBuilder obd = new OleDbCommandBuilder(da);
+            //cmd.ExecuteNonQuery();
+   
             DataSet ds = new DataSet();
             da.Fill(ds);
-
-            
 
             DataRow NewDr = ds.Tables[0].NewRow();
             NewDr["Date"] = date;
@@ -49,6 +46,7 @@ namespace OOPsAssignment
             DataSet dataSetChanges = ds.GetChanges();
             da.Update(dataSetChanges);
             ds.AcceptChanges();
+           
         }
     }
 }

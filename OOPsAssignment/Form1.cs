@@ -7,16 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.OleDb;
+
 
 namespace OOPsAssignment
 {
     public partial class Form1 : Form
     {
         int x_doorL_close = 200;
-        int x_doorR_close = 436;
         int x_doorL_open = 126;
-        int x_doorR_open = 506;
 
         int y_liftDown = 462;
         int y_liftUp = 85;
@@ -31,6 +29,9 @@ namespace OOPsAssignment
             InitializeComponent();
         }
 
+        public void loadcomponent() => InitializeComponent();
+        
+        public delegate void MethodCall();
         private void updoors_open_Tick(object sender, EventArgs e)
         {
             if (door_upL.Left >= x_doorL_open)
@@ -40,8 +41,9 @@ namespace OOPsAssignment
             }
             else
             {
+                btn_opendoor.BackColor = Color.White;
                 updoors_open.Enabled = false;
-
+                insertdata("Doors opened at FirstFloor");
             }
         }
 
@@ -54,7 +56,9 @@ namespace OOPsAssignment
             }
             else
             {
+                btn_closedoors.BackColor = Color.White;
                 updoors_close.Enabled = false;
+                insertdata("Doors closed at FirstFloor");
                 if (moving_down == true)
                 {
                     lift_display.Image = global::OOPsAssignment.Properties.Resources.down;
@@ -75,7 +79,9 @@ namespace OOPsAssignment
             }
             else
             {
+                btn_opendoor.BackColor = Color.White;
                 downdoors_open.Enabled = false;
+                insertdata("Doors opened at GroundFloor");
 
             }
         }
@@ -89,7 +95,9 @@ namespace OOPsAssignment
             }
             else
             {
+                btn_closedoors.BackColor = Color.White;
                 downdoors_close.Enabled = false;
+                insertdata("Doors closed at GroundFloor");
                 if (moving_up == true)
                 {
                     lift_display.Image = global::OOPsAssignment.Properties.Resources.up;
@@ -109,6 +117,9 @@ namespace OOPsAssignment
             }
             else
             {
+                btn_firstFloor.BackColor = Color.White;
+                request_G.BackColor = Color.White;
+                insertdata("LiftBox at First Floor");
                 moving_up = false;
                 lift_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay_;
                 G_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay_;
@@ -128,6 +139,9 @@ namespace OOPsAssignment
             }
             else
             {
+                btn_groundFloor.BackColor = Color.White;
+                request_F.BackColor = Color.White;
+                insertdata("liftBox at Ground Floor");
                 moving_down = false;
                 lift_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay; // resource file name Red_firstFloorDisplay = Red_GroundFloorDisplay
                 G_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay;    // resource file name Red_firstFloorDisplay = Red_GroundFloorDisplay
@@ -141,54 +155,66 @@ namespace OOPsAssignment
 
         private void btn_firstFloor_Click(object sender, EventArgs e)
         {
-            moving_up = true;
-            insertdata("going to first floor");
-
-
-            downdoors_close.Enabled = true;
+            if (moving_down == false)
+            {
+                btn_firstFloor.BackColor = Color.Red;
+                moving_up = true;
+                downdoors_close.Enabled = true;
+            }
         }
 
         private void btn_groundFloor_Click(object sender, EventArgs e)
         {
-            moving_down = true;
-            updoors_close.Enabled = true;
+
+            if(moving_up == false)
+            {
+                btn_groundFloor.BackColor = Color.Red;
+                moving_down = true;
+                updoors_close.Enabled = true;
+            }
+            
         }
 
         private void btn_opendoor_Click(object sender, EventArgs e)
         {
+            btn_opendoor.BackColor = Color.Orange;
             if (LiftStatus.Equals("GroundFloor")) { downdoors_open.Enabled = true; }
             if (LiftStatus.Equals("FirstFloor")) { updoors_open.Enabled = true; }
         }
 
         private void btn_closedoors_Click(object sender, EventArgs e)
         {
+            btn_closedoors.BackColor = Color.Orange;
             if (LiftStatus.Equals("GroundFloor")) { downdoors_close.Enabled = true; }
             if (LiftStatus.Equals("FirstFloor")) { updoors_close.Enabled = true; }
-
         }
 
         private void request_F_Click(object sender, EventArgs e)
         {
-            moving_down = true;
-            updoors_close.Enabled = true;
+            if (LiftStatus.Equals("FirstFloor"))
+            {
+                request_F.BackColor = Color.Red;
+                moving_down = true;
+                updoors_close.Enabled = true;
+            }
+            
         }
 
         private void request_G_Click(object sender, EventArgs e)
         {
-            moving_up = true;
-            downdoors_close.Enabled = true;
-        }
-        /*
-         * Database part
-         * 
-         */
+            if (LiftStatus.Equals("GroundFloor"))
+            {
+                request_G.BackColor = Color.Red;
+                moving_up = true;
+                downdoors_close.Enabled = true;
 
-        private bool filled;
-        public DataSet ds = new DataSet();
+            }
+        }
 
         private void btn_log_Click(object sender, EventArgs e)
         {
-            LoadData();
+            MethodCall call = new MethodCall(LoadData);
+            call.Invoke();
         }
 
         private void LoadData()
@@ -209,10 +235,16 @@ namespace OOPsAssignment
         {
             string date = DateTime.Now.ToShortDateString();
             string time = DateTime.Now.ToLongTimeString();
+            //try
+            {
+                logInformation s = new logInformation();
+                s.SaveLog(action);
+            }
+            //catch
+            {
+                MessageBox.Show("Error saving the Log Data","Message",MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            logInformation s = new logInformation();
-            s.SaveLog(action);
-            MessageBox.Show("status udpated");
+            }
             LoadData();
         }
 
@@ -220,7 +252,7 @@ namespace OOPsAssignment
         {
             // TODO: This line of code loads data into the 'appData.Log_Details' table. You can move, or remove it, as needed.
             //this.log_DetailsTableAdapter.Fill(this.appData.Log_Details);
-            LoadData();
+            //LoadData();
 
         }
     }

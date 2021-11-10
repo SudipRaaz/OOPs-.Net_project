@@ -160,7 +160,7 @@ namespace OOPsAssignment
             // lift_display
             // 
             this.lift_display.BackColor = System.Drawing.SystemColors.Desktop;
-            this.lift_display.Location = new System.Drawing.Point(712, 271);
+            this.lift_display.Location = new System.Drawing.Point(673, 271);
             this.lift_display.Name = "lift_display";
             this.lift_display.Size = new System.Drawing.Size(142, 172);
             this.lift_display.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -170,7 +170,7 @@ namespace OOPsAssignment
             // black_panel
             // 
             this.black_panel.BackColor = System.Drawing.SystemColors.Desktop;
-            this.black_panel.Location = new System.Drawing.Point(712, 213);
+            this.black_panel.Location = new System.Drawing.Point(673, 213);
             this.black_panel.Name = "black_panel";
             this.black_panel.Size = new System.Drawing.Size(142, 291);
             this.black_panel.TabIndex = 10;
@@ -180,7 +180,7 @@ namespace OOPsAssignment
             // 
             this.btn_opendoor.BackgroundImage = global::OOPsAssignment.Properties.Resources.open_door;
             this.btn_opendoor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_opendoor.Location = new System.Drawing.Point(814, 705);
+            this.btn_opendoor.Location = new System.Drawing.Point(775, 705);
             this.btn_opendoor.Name = "btn_opendoor";
             this.btn_opendoor.Size = new System.Drawing.Size(64, 57);
             this.btn_opendoor.TabIndex = 7;
@@ -191,7 +191,7 @@ namespace OOPsAssignment
             // 
             this.btn_closedoors.BackgroundImage = global::OOPsAssignment.Properties.Resources.close_door;
             this.btn_closedoors.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_closedoors.Location = new System.Drawing.Point(694, 705);
+            this.btn_closedoors.Location = new System.Drawing.Point(655, 705);
             this.btn_closedoors.Name = "btn_closedoors";
             this.btn_closedoors.Size = new System.Drawing.Size(69, 57);
             this.btn_closedoors.TabIndex = 6;
@@ -202,7 +202,7 @@ namespace OOPsAssignment
             // 
             this.btn_groundFloor.BackgroundImage = global::OOPsAssignment.Properties.Resources.groundFloor;
             this.btn_groundFloor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_groundFloor.Location = new System.Drawing.Point(756, 626);
+            this.btn_groundFloor.Location = new System.Drawing.Point(717, 626);
             this.btn_groundFloor.Name = "btn_groundFloor";
             this.btn_groundFloor.Size = new System.Drawing.Size(58, 57);
             this.btn_groundFloor.TabIndex = 5;
@@ -215,7 +215,7 @@ namespace OOPsAssignment
             this.btn_firstFloor.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btn_firstFloor.BackgroundImage = global::OOPsAssignment.Properties.Resources.firstFloor;
             this.btn_firstFloor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_firstFloor.Location = new System.Drawing.Point(756, 552);
+            this.btn_firstFloor.Location = new System.Drawing.Point(717, 552);
             this.btn_firstFloor.Name = "btn_firstFloor";
             this.btn_firstFloor.Size = new System.Drawing.Size(58, 57);
             this.btn_firstFloor.TabIndex = 4;
@@ -315,7 +315,7 @@ namespace OOPsAssignment
             // pictureBox3
             // 
             this.pictureBox3.Image = global::OOPsAssignment.Properties.Resources.button_wall_container;
-            this.pictureBox3.Location = new System.Drawing.Point(662, 154);
+            this.pictureBox3.Location = new System.Drawing.Point(623, 154);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(239, 733);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -342,12 +342,12 @@ namespace OOPsAssignment
             this.timeDataGridViewTextBoxColumn,
             this.actionDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.logDetailsBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(907, 194);
+            this.dataGridView1.Location = new System.Drawing.Point(888, 154);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(632, 196);
+            this.dataGridView1.Size = new System.Drawing.Size(632, 711);
             this.dataGridView1.TabIndex = 17;
             // 
             // logDetailsBindingSource
@@ -426,7 +426,7 @@ namespace OOPsAssignment
             this.Controls.Add(this.pictureBox3);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Elevator";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.G_display)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.F_display)).EndInit();
