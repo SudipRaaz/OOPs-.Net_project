@@ -34,10 +34,10 @@ namespace OOPsAssignment
         public delegate void MethodCall();
         private void updoors_open_Tick(object sender, EventArgs e) // timer event
         {
-            if (door_upL.Left >= x_doorL_open)
+            if (door_upL.Left >= x_doorL_open) // if door is closed
             {
-                door_upL.Left -= 1;
-                door_upR.Left += 1;
+                MethodCall updoor = new MethodCall(updoors_openMethod);
+                updoor.Invoke();
             }
             else
             {
@@ -47,19 +47,25 @@ namespace OOPsAssignment
             }
         }
 
+        private void updoors_openMethod() // animate method to open the doors
+        {
+            door_upL.Left -= 1;
+            door_upR.Left += 1;
+        }
+
         private void updoors_close_Tick(object sender, EventArgs e) // timer event
         {
-            if (door_upL.Left <= x_doorL_close)
+            if (door_upL.Left <= x_doorL_close) // if door is open
             {
-                door_upL.Left += 1;
-                door_upR.Left -= 1;
+                MethodCall updoor = new MethodCall(updoors_closeMethod);
+                updoor.Invoke();
             }
             else
             {
                 btn_closedoors.BackColor = Color.White;
                 updoors_close.Enabled = false;
                 insertdata("Doors closed at FirstFloor");
-                if (moving_down == true)
+                if (moving_down == true) // if also moving down
                 {
                     lift_display.Image = global::OOPsAssignment.Properties.Resources.down;
                     F_display.Image = global::OOPsAssignment.Properties.Resources.down;
@@ -68,6 +74,12 @@ namespace OOPsAssignment
                     go_down.Enabled = true;
                 }
             }
+        }
+
+        private void updoors_closeMethod() // animate method to close the doors 
+        {
+            door_upL.Left += 1;
+            door_upR.Left -= 1;
         }
 
         private void downdoors_open_Tick(object sender, EventArgs e) // timer event
@@ -86,7 +98,7 @@ namespace OOPsAssignment
             }
         }
 
-        private void downdoors_openMethod()
+        private void downdoors_openMethod() // animate method to open down doors
         {
             door_downL.Left -= 1;
             door_downR.Left += 1;
@@ -104,7 +116,7 @@ namespace OOPsAssignment
                 btn_closedoors.BackColor = Color.White;
                 downdoors_close.Enabled = false;
                 insertdata("Doors closed at GroundFloor");
-                if (moving_up == true)
+                if (moving_up == true) // if also moving up
                 {
                     lift_display.Image = global::OOPsAssignment.Properties.Resources.up;
                     G_display.Image = global::OOPsAssignment.Properties.Resources.up;
@@ -130,16 +142,16 @@ namespace OOPsAssignment
             }
             else
             {
-                btn_firstFloor.BackColor = Color.White;
-                request_G.BackColor = Color.White;
-                insertdata("LiftBox at First Floor");
-                moving_up = false;
-                liftbox.Image = Properties.Resources.inside_life;
+                btn_firstFloor.BackColor = Color.White; // changing button color
+                request_G.BackColor = Color.White; // changing button color
+                insertdata("LiftBox at First Floor"); // inserting into database 
+                moving_up = false; // updating moving up status as false
+                liftbox.Image = Properties.Resources.inside_life; // changing image resource
                 lift_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay_;
                 G_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay_;
                 F_display.Image = global::OOPsAssignment.Properties.Resources.Red_firstFloorDisplay_;
 
-                LiftStatus = "FirstFloor";
+                LiftStatus = "FirstFloor"; // updating liftStaus
                 go_up.Enabled = false;
                 updoors_open.Enabled = true;
             }
@@ -206,15 +218,34 @@ namespace OOPsAssignment
         private void btn_opendoor_Click(object sender, EventArgs e) // assigning button event 
         {
             btn_opendoor.BackColor = Color.Orange;
-            if (LiftStatus.Equals("GroundFloor")) { downdoors_open.Enabled = true; }
-            if (LiftStatus.Equals("FirstFloor")) { updoors_open.Enabled = true; }
+            switch (LiftStatus)
+            {
+                case "GroundFloor":
+                    downdoors_open.Enabled = true;
+                    break;
+                case "FirstFloor":
+                    updoors_open.Enabled = true;
+                    break;
+
+            }
+            //if (LiftStatus.Equals("GroundFloor")) { downdoors_open.Enabled = true; }
+            //if (LiftStatus.Equals("FirstFloor")) { updoors_open.Enabled = true; }
         }
 
         private void btn_closedoors_Click(object sender, EventArgs e) // assigning button event 
         {
             btn_closedoors.BackColor = Color.Orange;
-            if (LiftStatus.Equals("GroundFloor")) { downdoors_close.Enabled = true; }
-            if (LiftStatus.Equals("FirstFloor")) { updoors_close.Enabled = true; }
+            switch (LiftStatus)
+            {
+                case "GroundFloor":
+                    downdoors_close.Enabled = true;
+                    break;
+                case "FirstFloor":
+                    updoors_close.Enabled = true;
+                    break;
+            }
+            //if (LiftStatus.Equals("GroundFloor")) { downdoors_close.Enabled = true; }
+            //if (LiftStatus.Equals("FirstFloor")) { updoors_close.Enabled = true; }
         }
 
         private void request_F_Click(object sender, EventArgs e) // request first floor event
@@ -241,8 +272,6 @@ namespace OOPsAssignment
 
         private void btn_log_Click(object sender, EventArgs e)  // using delegate
         {
-            //MethodCall call = new MethodCall(LoadData); // invoking loaddata method
-            //call.Invoke();
             dataGridView1.DataSource = null;
         }
 
@@ -277,19 +306,18 @@ namespace OOPsAssignment
             LoadData();
         }
 
-        // load the data when the form loads
-        private void Form1_Load(object sender, EventArgs e)
+        
+        private void Form1_Load(object sender, EventArgs e) // load the data when the form loads
         {
             // TODO: This line of code loads data into the 'appData.Log_Details' table. You can move, or remove it, as needed.
             //this.log_DetailsTableAdapter.Fill(this.appData.Log_Details);
             //LoadData();
 
-        }
+        }  
 
         private void exit_Click(object sender, EventArgs e) // button event
         {
             Application.ExitThread(); // close the software
-
         }
     }
 

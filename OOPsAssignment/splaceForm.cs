@@ -19,7 +19,7 @@ namespace OOPsAssignment
             backgroundWorker1.RunWorkerAsync();
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e) // do the work 
         {
             for (int i = 0; i < 100; i++)
             {
@@ -28,20 +28,19 @@ namespace OOPsAssignment
                 System.Threading.Thread.Sleep(10);
                 
             }
-            
             Form1 load = new Form1();
             load.loadcomponent();
             
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e) // process the changes in the background using new thread
         {
             progressBar1.Value = e.ProgressPercentage;
             lbl_percent.Text = count.ToString();
 
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) // on completion of the background task
         {
             this.Hide();
             Form1 main = new Form1();
