@@ -66,6 +66,7 @@ namespace OOPsAssignment
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.exit = new System.Windows.Forms.Button();
+            this.timer_close = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logDetailsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appData)).BeginInit();
@@ -413,6 +414,11 @@ namespace OOPsAssignment
             this.exit.UseVisualStyleBackColor = true;
             this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
+            // timer_close
+            // 
+            this.timer_close.Interval = 5000;
+            this.timer_close.Tick += new System.EventHandler(this.timer_close_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -506,6 +512,7 @@ namespace OOPsAssignment
         private System.Windows.Forms.DataGridViewTextBoxColumn timeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn actionDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button exit;
+        private System.Windows.Forms.Timer timer_close;
     }
 }
 

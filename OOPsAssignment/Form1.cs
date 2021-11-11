@@ -34,7 +34,7 @@ namespace OOPsAssignment
         public delegate void MethodCall();
         private void updoors_open_Tick(object sender, EventArgs e) // timer event
         {
-            if (door_upL.Left >= x_doorL_open) // if door is closed
+            if (door_upL.Left >= x_doorL_open && updoors_close.Enabled != true) // if door is closed
             {
                 MethodCall updoor = new MethodCall(updoors_openMethod);
                 updoor.Invoke();
@@ -44,6 +44,7 @@ namespace OOPsAssignment
                 btn_opendoor.BackColor = Color.White;
                 updoors_open.Enabled = false;
                 insertdata("Doors opened at FirstFloor");
+                timer_close.Enabled = true;
             }
         }
 
@@ -55,7 +56,7 @@ namespace OOPsAssignment
 
         private void updoors_close_Tick(object sender, EventArgs e) // timer event
         {
-            if (door_upL.Left <= x_doorL_close) // if door is open
+            if (door_upL.Left <= x_doorL_close && updoors_open.Enabled != true ) // if door is open
             {
                 MethodCall updoor = new MethodCall(updoors_closeMethod);
                 updoor.Invoke();
@@ -84,7 +85,7 @@ namespace OOPsAssignment
 
         private void downdoors_open_Tick(object sender, EventArgs e) // timer event
         {
-            if (door_downL.Left >= x_doorL_open)
+            if (door_downL.Left >= x_doorL_open && downdoors_close.Enabled != true)
             {
                 MethodCall downdoor = new MethodCall(downdoors_openMethod);
                 downdoor.Invoke();
@@ -94,6 +95,7 @@ namespace OOPsAssignment
                 btn_opendoor.BackColor = Color.White;
                 downdoors_open.Enabled = false;
                 insertdata("Doors opened at GroundFloor");
+                timer_close.Enabled = true;
 
             }
         }
@@ -106,7 +108,7 @@ namespace OOPsAssignment
 
         private void downdoors_close_Tick(object sender, EventArgs e) // timer event
         {
-            if (door_downL.Left <= x_doorL_close) // if lift doors are open
+            if (door_downL.Left <= x_doorL_close && downdoors_open.Enabled != true) // if lift doors are open
             {
                 MethodCall downdoor = new MethodCall(downdoors_closeMethod);
                 downdoor.Invoke();
@@ -228,8 +230,6 @@ namespace OOPsAssignment
                     break;
 
             }
-            //if (LiftStatus.Equals("GroundFloor")) { downdoors_open.Enabled = true; }
-            //if (LiftStatus.Equals("FirstFloor")) { updoors_open.Enabled = true; }
         }
 
         private void btn_closedoors_Click(object sender, EventArgs e) // assigning button event 
@@ -244,8 +244,6 @@ namespace OOPsAssignment
                     updoors_close.Enabled = true;
                     break;
             }
-            //if (LiftStatus.Equals("GroundFloor")) { downdoors_close.Enabled = true; }
-            //if (LiftStatus.Equals("FirstFloor")) { updoors_close.Enabled = true; }
         }
 
         private void request_F_Click(object sender, EventArgs e) // request first floor event
@@ -318,6 +316,21 @@ namespace OOPsAssignment
         private void exit_Click(object sender, EventArgs e) // button event
         {
             Application.ExitThread(); // close the software
+        }
+
+        private void timer_close_Tick(object sender, EventArgs e)
+        {
+            switch (LiftStatus)
+            {
+                case "GroundFloor":
+                    downdoors_close.Enabled = true;
+                    break;
+                case "FirstFloor":
+                    updoors_close.Enabled = true;
+                    break;
+            }
+            timer_close.Enabled = false;
+
         }
     }
 
